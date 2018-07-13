@@ -16,7 +16,7 @@ public:
     head = NULL;
     tail = NULL;
   }
-
+//Creating the node at the last position of linklist
   void createnode_last(int value)
   {
     node *temp = new node;
@@ -33,7 +33,7 @@ public:
       tail = temp;
     }
   }
-
+//Creating the node at the first position of linklist
   void createnode_first(int value)
   {
     node *temp = new node;
@@ -50,7 +50,7 @@ public:
     }
 
   }
-
+//getting the linklist length
   int get_length()
   {
     node *temp = new node;
@@ -62,7 +62,7 @@ public:
     }
     return len;
   }
-
+//Creating the node at a particular position of linklist
   void createnode_position(int value, int position)
   {
     int length = get_length();
@@ -83,7 +83,52 @@ public:
       pos->next = temp;
     }
   }
-
+//deleting the first node of linklist
+  void delete_first()
+  {
+    node *temp = new node;
+    temp = head;
+    head = temp->next;
+    delete temp;
+  }
+//delete last node
+  void delete_last()
+  {
+    node *temp = new node;
+    temp = tail;
+    node *pos, *prev;
+    pos = head;
+    while (pos!=tail){
+      prev = pos;
+      pos = pos->next;
+    }
+    prev->next = NULL;
+    tail = prev;
+    delete temp;
+  }
+//deleting the node at a particular position
+  void delete_position(int position)
+  {
+    int length = get_length();
+    if(position > length){
+      cout<<"Node position out of range"<<'\n';
+    }
+    else {
+      node *temp = new node;
+      node *pos, *prev;
+      pos = head;
+      int i = 1;
+      while (i <= position-1){
+        prev = pos;
+        pos = pos->next;
+        i++;
+      }
+      prev->next = pos->next;
+      temp = pos;
+      delete temp;
+    }
+  }
+//printing the linklist
   void display()
   {
     node *temp = new node;
@@ -114,6 +159,12 @@ int main() {
   linklist.createnode_last(90);
   linklist.display();
   linklist.createnode_position(70, 6);
+  linklist.display();
+  linklist.delete_first();
+  linklist.display();
+  linklist.delete_last();
+  linklist.display();
+  linklist.delete_position(4);
   linklist.display();
   int length = linklist.get_length();
   cout<<"linklist length:"<<length<<'\n';
